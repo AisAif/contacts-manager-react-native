@@ -9,29 +9,35 @@ export function AuthProvider(props) {
 
     const register = async (data, navigation) => {
         setIsLoading(true)
-        let result = await userService.signup(data, navigation)
-        if (result) {
+        let result = await userService.signup(data)
+        if (result.status) {
             alert("Anda Berhasil Mendaftar")
+            navigation.navigate("Login")
         } else {
-            alert("Anda Gagal Mendaftar")
+            alert(`Anda Gagal Mendaftar\n\n${result.data.errors}`)
         }
         setIsLoading(false)
     }
 
     const login = async (data, navigation) => {
         setIsLoading(true)
-        let result = await userService.login(data, navigation)
-        if (result) {
+        let result = await userService.login(data)
+        if (result.status) {
             setIsLogin(true)
+            navigation.navigate("MainTab")
+        } else {
+            alert(`Anda Gagal Login\n\n${result.data.errors}`)
+            console.log(result.data)
         }
         setIsLoading(false)
     }
 
     const logout = async (navigation) => {
         setIsLoading(true)
-        let result = await userService.logout(navigation)
+        let result = await userService.logout()
         if (result) {
             setIsLogin(false)
+            navigation.navigate("Login")
         }
         setIsLoading(false)
     }

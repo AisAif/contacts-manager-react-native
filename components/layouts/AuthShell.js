@@ -11,7 +11,7 @@ export default function AuthShell(props) {
         <View>
             <Spinner visible={isLoading}/>
             <Header>{props.title}</Header>
-            <View className="pt-20 px-4 bg-slate-200 h-screen w-screen">
+            <View className="py-4 px-4 bg-slate-200 h-screen w-screen">
                 <StatusBar style="auto"/>
                 <View>{props.children}</View>
             </View>

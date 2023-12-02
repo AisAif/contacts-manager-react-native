@@ -1,4 +1,4 @@
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { useContext, useState } from "react";
 import GuestShell from "../components/layouts/GuestShell";
 import Input from "../components/fragments/Input";
@@ -16,11 +16,19 @@ export default function LoginScreen({navigation}) {
         <GuestShell>
             <View className="flex justify-center items-center">
                 <Text className="text-xl font-semibold text-blue-500">Silahkan Login</Text>
-                <ScrollView className="w-full">
+                <View className="w-full mt-6">
                     <Input name="username" value={dataCredential.username} onChange={(value) => setDataCredential({...dataCredential, username: value})} />
-                    <Input name="password" value={dataCredential.password} onChange={(value) => setDataCredential({...dataCredential, password: value})} secureTextEntry={true} />
-                </ScrollView>
-                <Button onClick={() => login(dataCredential, navigation)}>Masuk</Button>
+                    <Input mt="6" name="password" value={dataCredential.password} onChange={(value) => setDataCredential({...dataCredential, password: value})} secureTextEntry={true} />
+                </View>
+                <View style={{marginTop: 32}} className="w-full">
+                    <Button onClick={() => login(dataCredential, navigation)}>Masuk</Button>
+                </View>
+                <View className="mt-6 flex flex-row">
+                    <Text>Belum mendaftar? </Text>
+                    <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+                        <Text className="text-blue-500">Klik di sini</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </GuestShell>
     )
